@@ -74,9 +74,9 @@ abstract class Datatable
 
     protected function globalFilter(Request $request): callable
     {
-        $filters = json_decode($request['filters'], true);
 
-        $filterValue = $filters['global']['value'];
+        $filters = $request['filters'];
+        $filterValue = $filters['global']['value'] ?? '';
 
         return function (Builder $query) use ($filterValue) {
             $query->where('name', 'LIKE', '%' . $filterValue . '%');

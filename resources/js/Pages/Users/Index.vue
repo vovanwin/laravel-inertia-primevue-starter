@@ -69,8 +69,8 @@
                         headerStyle="width: 3rem"
                     ></Column>
                     <Column
-                        field="code"
-                        header="Code"
+                        field="id"
+                        header="Id"
                         :sortable="true"
                         headerStyle="width:5%; min-width:10rem;"
                     >

@@ -80,8 +80,8 @@
                         </template>
                     </Column>
                     <Column
-                        field="name"
-                        header="Name"
+                        field="id"
+                        header="Id"
                         :sortable="true"
                         headerStyle="width:40%; min-width:10rem;"
                     >
@@ -256,7 +256,6 @@ import Dropdown from "primevue/dropdown";
 import RadioButton from "primevue/radiobutton";
 import Dialog from "primevue/dialog";
 import DatatableService from "../../../Services/DatatableService";
-import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
 
 export default {
