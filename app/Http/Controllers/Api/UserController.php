@@ -36,7 +36,7 @@ class UserController extends Controller
             password: Hash::make($request->password)
         );
 
-        $user = $this->userService->create($dto);
+        $user = $this->userService->create(dto: $dto);
 
         return response()->json([
             'success' => true,
@@ -47,15 +47,14 @@ class UserController extends Controller
 
     public function update(
         UpdateUserRequest $request,
-        User        $user,
+        int $user,
     ): JsonResponse
     {
-        $dto = new UpdateUserDTO(
-            name: $request->name,
-            email: $request->email,
-        );
+        $data = $request->validated();
+        $data = [...$data, 'id' => $user];
+        $dto = new UpdateUserDTO(...$data);
 
-        $this->userService->update(user: $user, dto: $dto);
+        $this->userService->update(dto: $dto);
 
         return response()->json([
             'success' => true,
@@ -63,11 +62,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function destroy(User $user): JsonResponse
+    public function destroy(int $user): JsonResponse
     {
         // abort_if(!auth()->user()->admin, 403);
 
-        $user->delete();
+        $this->userService->delete(userId: $user);
+
         return response()->json(['message' => __('auth.deleted')]);
     }
 }

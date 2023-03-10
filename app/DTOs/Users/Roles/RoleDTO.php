@@ -1,15 +1,13 @@
 <?php
 
-namespace App\DTOs;
-
-use Spatie\DataTransferObject\DataTransferObject;
+namespace App\DTOs\Users\Roles;
 
 class RoleDTO
 {
     public function __construct(
         public readonly string $name,
-        public readonly string $email,
         public readonly string $guard_name,
+        public readonly ?array $permissions,
     )
     {
     }

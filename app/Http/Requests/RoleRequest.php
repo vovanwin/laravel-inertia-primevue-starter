@@ -4,6 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property-read string $name
+ * @property-read string $guard_name
+ * @property-read array $permissions
+ */
 class RoleRequest extends FormRequest
 {
     /**

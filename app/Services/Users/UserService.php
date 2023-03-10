@@ -13,18 +13,17 @@ class UserService
     {
     }
 
-    public function update(User $user, UpdateUserDTO $dto): User
+    public function update(UpdateUserDTO $dto): User
     {
-       return $this->userRepository->update(user: $user, dto: $dto);
+       return $this->userRepository->update(dto: $dto);
     }
 
     /**
      * @throws \Throwable
      */
-    public function delete(User $user): void
+    public function delete(int $userId): void
     {
-        $user->tokens->each->delete();
-        $user->deleteOrFail();
+        $this->userRepository->delete(userId: $userId);
     }
 
     public function create(UserDTO $dto): User
