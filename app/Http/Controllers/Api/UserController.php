@@ -2,74 +2,64 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Actions\Users\CreateUser;
-use App\Actions\Users\UpdateUser;
 use App\Datatables\UserDatatable;
-use App\DTOs\UserDTO;
+use App\DTOs\Users\UpdateUserDTO;
+use App\DTOs\Users\UserDTO;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Users\UpdateUserRequest;
+use App\Http\Requests\Users\UserRequest;
 use App\Models\User;
+use App\Services\Users\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Inertia\Inertia;
 
 class UserController extends Controller
 {
+    public function __construct(private readonly UserService $userService)
+    {
+    }
+
     public function index(Request $request, UserDatatable $datatable): JsonResponse
     {
         $data = $datatable->make($request);
         return response()->json($data);
     }
-    public function store(
-        Request    $request,
-        CreateUser $createUser
-    )
+
+    public function store(UserRequest $request): JsonResponse
     {
         //abort_if(!auth()->user()->admin, 403);
 
-        $request->validate([
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['nullable', 'string']
-        ]);
+        $dto = new UserDTO(
+            name: $request->name,
+            email: $request->email,
+            password: Hash::make($request->password)
+        );
 
-        $user = $createUser->execute(new UserDTO([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password'])
-        ]));
+        $user = $this->userService->create($dto);
 
         return response()->json([
             'success' => true,
-            'message' => 'User created successfully',
-            'data'    => $user
+            'message' => __('auth.created'),
+            'data' => $user
         ]);
     }
 
     public function update(
-        Request    $request,
-        User       $user,
-        UpdateUser $updateUser
+        UpdateUserRequest $request,
+        User        $user,
     ): JsonResponse
     {
-        // abort_if(!auth()->user()->admin, 403);
+        $dto = new UpdateUserDTO(
+            name: $request->name,
+            email: $request->email,
+        );
 
-        $request->validate([
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:users,email,' . $user->id],
-            'password' => ['nullable', 'string']
-        ]);
-
-        $updateUser->execute($user, new UserDTO([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => $request['password'] ?
-                Hash::make($request['password']) : null,
-        ]));
+        $this->userService->update(user: $user, dto: $dto);
 
         return response()->json([
             'success' => true,
-            'message' => 'User updated successfully',
+            'message' => __('auth.updated'),
         ]);
     }
 
@@ -78,6 +68,6 @@ class UserController extends Controller
         // abort_if(!auth()->user()->admin, 403);
 
         $user->delete();
-        return response()->json(['message' => 'User deleted successfully']);
+        return response()->json(['message' => __('auth.deleted')]);
     }
 }

@@ -4,9 +4,13 @@ namespace App\DTOs;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
-class RoleDTO extends DataTransferObject
+class RoleDTO
 {
-    public string $name;
-    public string $email;
-    public string $guard_name;
+    public function __construct(
+        public readonly string $name,
+        public readonly string $email,
+        public readonly string $guard_name,
+    )
+    {
+    }
 }
