@@ -19,12 +19,13 @@
         "tightenco/ziggy": "^1.5"
     },
     "require-dev": {
-        "spatie/laravel-ignition": "^2.0.0",
+        "barryvdh/laravel-debugbar": "^3.8",
         "fakerphp/faker": "^1.21.0",
         "laravel/sail": "^1.21",
         "mockery/mockery": "^1.5.1",
         "nunomaduro/collision": "^7.1.0",
-        "phpunit/phpunit": "^10.0.14"
+        "phpunit/phpunit": "^10.0.14",
+        "spatie/laravel-ignition": "^2.0.0"
     },
     "autoload": {
         "psr-4": {
