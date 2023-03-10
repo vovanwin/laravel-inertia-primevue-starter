@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Datatables\RoleDatatable;
@@ -20,6 +22,7 @@ class RoleController extends Controller
     public function index(Request $request, RoleDatatable $datatable): JsonResponse
     {
         $data = $datatable->make($request);
+
         return response()->json($data);
     }
 
@@ -43,12 +46,13 @@ class RoleController extends Controller
 
         $this->roleService->update(dto: $dto);
 
-        return $this->sendSuccess("Role updated successfully");
+        return $this->sendSuccess('Role updated successfully');
     }
 
     public function destroy(int $role)
     {
         $this->roleService->delete(roleId: $role);
-        return $this->sendSuccess("Role deleted successfully");
+
+        return $this->sendSuccess('Role deleted successfully');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\UserController;
+declare(strict_types=1);
+
 use App\Http\Controllers\ViewController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Fortify;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +18,12 @@ use Laravel\Fortify\Fortify;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('dashboard');
-});
+Route::get('/', fn () => redirect()->route('dashboard'));
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', fn () => Inertia::render('Dashboard'))->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/users', [ViewController::class,'users'])->name('users');
-    Route::get('/roles', [ViewController::class,'roles'])->name('roles');
-    Route::get('/permissions', [ViewController::class,'permissions'])->name('permissions');
+Route::middleware(['auth:sanctum', 'verified'])->group(function (): void {
+    Route::get('/users', [ViewController::class, 'users'])->name('users');
+    Route::get('/roles', [ViewController::class, 'roles'])->name('roles');
+    Route::get('/permissions', [ViewController::class, 'permissions'])->name('permissions');
 });

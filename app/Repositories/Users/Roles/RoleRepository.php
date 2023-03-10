@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories\Users\Roles;
 
 use App\DTOs\Users\Roles\RoleDTO;
@@ -26,7 +28,7 @@ class RoleRepository
     {
         $role = $this->findRoleById(roleId: $dto->id);
 
-        return tap($role, static fn($role) => $role->update([
+        return tap($role, static fn ($role) => $role->update([
             'name' => $dto->name,
             'guard_name' => $dto->guard_name,
         ]));

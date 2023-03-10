@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Users;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 
 /**
- * @property-read string $name
- * @property-read string $email
+ * @property string $name
+ * @property string $email
  */
 class UpdateUserRequest extends FormRequest
 {

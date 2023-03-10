@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories\Users;
 
 use App\DTOs\Users\UpdateUserDTO;
@@ -13,6 +15,7 @@ class UserRepository
     {
         return User::query()->where('id', $userId)->first();
     }
+
     public function create(UserDTO $dto): User
     {
         return User::create([
@@ -26,7 +29,7 @@ class UserRepository
     {
         $user = $this->findUserById(userId: $dto->id);
 
-        return tap($user, static fn($user) => $user->update([
+        return tap($user, static fn ($user) => $user->update([
             'name' => $dto->name,
             'email' => $dto->email,
         ]));

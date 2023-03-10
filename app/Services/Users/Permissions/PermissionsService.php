@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Users\Permissions;
 
 use App\DTOs\Users\Permissions\PermissionDTO;
@@ -26,6 +28,5 @@ class PermissionsService
     public function create(PermissionDTO $dto): Permission
     {
         return $this->permissionsRepository->create(dto: $dto);
-
     }
 }

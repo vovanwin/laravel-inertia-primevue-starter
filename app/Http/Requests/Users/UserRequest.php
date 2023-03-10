@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Users;
 
 use App\Models\User;
@@ -8,9 +10,9 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 /**
- * @property-read string $name
- * @property-read string $email
- * @property-read string $password
+ * @property string $name
+ * @property string $email
+ * @property string $password
  */
 class UserRequest extends FormRequest
 {

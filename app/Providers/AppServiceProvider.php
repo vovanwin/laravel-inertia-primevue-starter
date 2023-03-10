@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,20 +11,15 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         /*
         * Enabling Eloquent "Strict Mode"
@@ -31,6 +28,5 @@ class AppServiceProvider extends ServiceProvider
         * @doc https://laravel.com/docs/9.x/eloquent#enabling-eloquent-strict-mode
         */
         Model::shouldBeStrict(! $this->app->isProduction());
-
     }
 }

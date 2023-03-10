@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
@@ -12,12 +14,12 @@ class ViewController extends Controller
         return Inertia::render('Users/Index');
     }
 
-    public function roles() : Response
+    public function roles(): Response
     {
         return Inertia::render('Users/Roles/Index');
     }
 
-    public function permissions() : Response
+    public function permissions(): Response
     {
         return Inertia::render('Users/Permissions/Index');
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories\Users\Permissions;
 
 use App\DTOs\Users\Permissions\PermissionDTO;
@@ -26,7 +28,7 @@ class PermissionsRepository
     {
         $permission = $this->findPermissionById(permissionsId: $dto->id);
 
-        return tap($permission, static fn($permission) => $permission->update([
+        return tap($permission, static fn ($permission) => $permission->update([
             'name' => $dto->name,
             'guard_name' => $dto->guard_name,
         ]));

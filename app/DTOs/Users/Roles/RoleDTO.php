@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DTOs\Users\Roles;
 
 class RoleDTO
@@ -8,7 +10,6 @@ class RoleDTO
         public readonly string $name,
         public readonly string $guard_name,
         public readonly ?array $permissions,
-    )
-    {
+    ) {
     }
 }

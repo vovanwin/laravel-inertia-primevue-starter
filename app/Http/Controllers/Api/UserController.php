@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Datatables\UserDatatable;
@@ -23,12 +25,13 @@ class UserController extends Controller
     public function index(Request $request, UserDatatable $datatable): JsonResponse
     {
         $data = $datatable->make($request);
+
         return response()->json($data);
     }
 
     public function store(UserRequest $request): JsonResponse
     {
-        //abort_if(!auth()->user()->admin, 403);
+        // abort_if(!auth()->user()->admin, 403);
 
         $dto = new UserDTO(
             name: $request->name,
@@ -41,15 +44,14 @@ class UserController extends Controller
         return response()->json([
             'success' => true,
             'message' => __('auth.created'),
-            'data' => $user
+            'data' => $user,
         ]);
     }
 
     public function update(
         UpdateUserRequest $request,
         int $user,
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $data = $request->validated();
         $data = [...$data, 'id' => $user];
         $dto = new UpdateUserDTO(...$data);

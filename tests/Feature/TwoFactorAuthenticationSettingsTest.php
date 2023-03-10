@@ -1,16 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 class TwoFactorAuthenticationSettingsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_two_factor_authentication_can_be_enabled()
+    public function testTwoFactorAuthenticationCanBeEnabled(): void
     {
         $this->actingAs($user = User::factory()->create());
 
@@ -22,7 +29,7 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
         $this->assertCount(8, $user->fresh()->recoveryCodes());
     }
 
-    public function test_recovery_codes_can_be_regenerated()
+    public function testRecoveryCodesCanBeRegenerated(): void
     {
         $this->actingAs($user = User::factory()->create());
 
@@ -39,7 +46,7 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
         $this->assertCount(8, array_diff($user->recoveryCodes(), $user->fresh()->recoveryCodes()));
     }
 
-    public function test_two_factor_authentication_can_be_disabled()
+    public function testTwoFactorAuthenticationCanBeDisabled(): void
     {
         $this->actingAs($user = User::factory()->create());
 

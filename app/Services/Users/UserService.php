@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Users;
 
 use App\DTOs\Users\UpdateUserDTO;
@@ -15,7 +17,7 @@ class UserService
 
     public function update(UpdateUserDTO $dto): User
     {
-       return $this->userRepository->update(dto: $dto);
+        return $this->userRepository->update(dto: $dto);
     }
 
     /**
@@ -29,6 +31,5 @@ class UserService
     public function create(UserDTO $dto): User
     {
         return $this->userRepository->create(dto: $dto);
-
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'created' => 'Пользователь успешно создан.',
     'updated' => 'Пользователь успешно обновлен.',

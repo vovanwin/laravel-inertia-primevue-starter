@@ -1,13 +1,13 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
      * Each settings class used in your application must be registered, you can
      * put them (manually) here.
      */
     'settings' => [
-
     ],
 
     /*
@@ -22,9 +22,7 @@ return [
      */
     'default_repository' => 'database',
 
-    /*
-     * Settings will be stored and loaded from these repositories.
-     */
+    // Settings will be stored and loaded from these repositories.
     'repositories' => [
         'database' => [
             'type' => Spatie\LaravelSettings\SettingsRepositories\DatabaseSettingsRepository::class,

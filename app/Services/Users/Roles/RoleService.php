@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Users\Roles;
 
 use App\DTOs\Users\Roles\RoleDTO;
@@ -26,6 +28,5 @@ class RoleService
     public function create(RoleDTO $dto): Role
     {
         return $this->roleRepository->create(dto: $dto);
-
     }
 }

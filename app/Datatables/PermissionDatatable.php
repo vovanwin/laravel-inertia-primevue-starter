@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Datatables;
 
 use Spatie\Permission\Models\Permission;

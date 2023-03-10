@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -61,11 +64,11 @@ abstract class Datatable
 
     protected function sortAndOrder(Request $request): Builder
     {
-        if (!$request->has('sortField') || !$request->has('sortOrder')) {
+        if (! $request->has('sortField') || ! $request->has('sortOrder')) {
             return $this->builder;
         }
 
-        $direction = ($request['sortOrder'] == 1) ? 'desc' : 'asc';
+        $direction = (1 == $request['sortOrder']) ? 'desc' : 'asc';
 
         return $this->builder->orderBy($request['sortField'], $direction);
     }
@@ -74,12 +77,11 @@ abstract class Datatable
 
     protected function globalFilter(Request $request): callable
     {
-
         $filters = $request['filters'];
         $filterValue = $filters['global']['value'] ?? '';
 
-        return function (Builder $query) use ($filterValue) {
-            $query->where('name', 'LIKE', '%' . $filterValue . '%');
+        return function (Builder $query) use ($filterValue): void {
+            $query->where('name', 'LIKE', '%'.$filterValue.'%');
         };
     }
 }

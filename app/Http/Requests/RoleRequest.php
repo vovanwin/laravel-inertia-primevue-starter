@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * @property-read string $name
- * @property-read string $guard_name
- * @property-read array $permissions
+ * @property string $name
+ * @property string $guard_name
+ * @property array  $permissions
  */
 class RoleRequest extends FormRequest
 {
