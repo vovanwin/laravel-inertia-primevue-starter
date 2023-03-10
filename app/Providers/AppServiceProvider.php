@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        /*
+        * Enabling Eloquent "Strict Mode"
+        *
+        *
+        * @doc https://laravel.com/docs/9.x/eloquent#enabling-eloquent-strict-mode
+        */
+        Model::shouldBeStrict(! $this->app->isProduction());
+
     }
 }
